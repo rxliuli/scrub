@@ -1,6 +1,6 @@
 {
   "name": "site-eraser",
-  "description": "manifest.json description",
+  "description": "One-click clear all site data (cookies, storage, cache) for the current website.",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -14,7 +14,7 @@
     "build:safari": "wxt build -b safari",
     "compile": "tsc --noEmit",
     "postinstall": "wxt prepare",
-    "test": "is-ci && pnpm exec playwright install || echo 'Not in CI' && vitest run",
+    "test": "is-ci && pnpm exec playwright install --with-deps; vitest run",
     "init-project": "vite-node lib/build/init.ts"
   },
   "dependencies": {
