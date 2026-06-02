@@ -27,7 +27,7 @@ export async function eraseContentData(): Promise<EraseResult> {
       result.localStorage = { cleared: true, count }
     }
   } catch (e) {
-    console.warn('[Site Eraser] Failed to clear localStorage:', e)
+    console.warn('[Scrub] Failed to clear localStorage:', e)
   }
 
   try {
@@ -37,7 +37,7 @@ export async function eraseContentData(): Promise<EraseResult> {
       result.sessionStorage = { cleared: true, count }
     }
   } catch (e) {
-    console.warn('[Site Eraser] Failed to clear sessionStorage:', e)
+    console.warn('[Scrub] Failed to clear sessionStorage:', e)
   }
 
   try {
@@ -53,7 +53,7 @@ export async function eraseContentData(): Promise<EraseResult> {
                 req.onerror = () => reject(req.error)
                 req.onblocked = () => {
                   console.warn(
-                    `[Site Eraser] IndexedDB "${db.name}" delete blocked (still open?)`,
+                    `[Scrub] IndexedDB "${db.name}" delete blocked (still open?)`,
                   )
                   resolve()
                 }
@@ -63,7 +63,7 @@ export async function eraseContentData(): Promise<EraseResult> {
         const failed = results.filter((r) => r.status === 'rejected')
         if (failed.length > 0) {
           console.warn(
-            `[Site Eraser] Failed to delete ${failed.length}/${dbs.length} IndexedDB databases`,
+            `[Scrub] Failed to delete ${failed.length}/${dbs.length} IndexedDB databases`,
             failed.map((r) => (r as PromiseRejectedResult).reason),
           )
         }
@@ -71,11 +71,11 @@ export async function eraseContentData(): Promise<EraseResult> {
       }
     } else {
       console.warn(
-        '[Site Eraser] indexedDB.databases() not available, skipping IndexedDB cleanup',
+        '[Scrub] indexedDB.databases() not available, skipping IndexedDB cleanup',
       )
     }
   } catch (e) {
-    console.warn('[Site Eraser] Failed to clear IndexedDB:', e)
+    console.warn('[Scrub] Failed to clear IndexedDB:', e)
   }
 
   try {
@@ -85,7 +85,7 @@ export async function eraseContentData(): Promise<EraseResult> {
       result.cacheStorage = { cleared: true, count: keys.length }
     }
   } catch (e) {
-    console.warn('[Site Eraser] Failed to clear Cache Storage:', e)
+    console.warn('[Scrub] Failed to clear Cache Storage:', e)
   }
 
   try {
@@ -103,7 +103,7 @@ export async function eraseContentData(): Promise<EraseResult> {
       }
     }
   } catch (e) {
-    console.warn('[Site Eraser] Failed to clear OPFS:', e)
+    console.warn('[Scrub] Failed to clear OPFS:', e)
   }
 
   return result

@@ -13,7 +13,7 @@ export default defineBackground(() => {
   messager.onMessage('eraseCookies', async (message) => {
     const url = message.sender.tab?.url
     if (!url) {
-      console.warn('[Site Eraser] No tab URL available for cookie clearing')
+      console.warn('[Scrub] No tab URL available for cookie clearing')
       return { cookies: 0, browsingData: false }
     }
 
@@ -47,14 +47,14 @@ export default defineBackground(() => {
         const failed = results.filter((r) => r.status === 'rejected')
         if (failed.length > 0) {
           console.warn(
-            `[Site Eraser] Failed to remove ${failed.length}/${all.length} cookies`,
+            `[Scrub] Failed to remove ${failed.length}/${all.length} cookies`,
             failed.map((r) => (r as PromiseRejectedResult).reason),
           )
         }
         cookies = all.length - failed.length
       }
     } catch (e) {
-      console.warn('[Site Eraser] Failed to clear cookies:', e)
+      console.warn('[Scrub] Failed to clear cookies:', e)
     }
 
     let browsingData = false
@@ -66,7 +66,7 @@ export default defineBackground(() => {
         )
         browsingData = true
       } catch (e) {
-        console.warn('[Site Eraser] Failed to clear browsingData:', e)
+        console.warn('[Scrub] Failed to clear browsingData:', e)
       }
     }
 

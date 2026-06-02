@@ -27,12 +27,12 @@ export default defineUnlistedScript(async () => {
   addItem(items, 'OPFS', contentResult.opfs)
 
   if (items.length === 0) {
-    alert(`Site Eraser - ${location.hostname}\n\nNo site data found.`)
+    alert(`Scrub - ${location.hostname}\n\nNo site data found.`)
     return
   }
 
   const lines = items.map(([label]) => `✓ ${label}`)
-  alert(`Site Eraser - ${location.hostname}\n\n${lines.join('\n')}`)
+  alert(`Scrub - ${location.hostname}\n\n${lines.join('\n')}`)
 })
 
 function addItem(
