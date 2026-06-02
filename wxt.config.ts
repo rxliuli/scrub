@@ -19,8 +19,8 @@ export default defineConfig({
     const manifest: UserManifest = {
       name: 'Site Eraser',
       description:
-        'A template for WXT, a WebExtension framework based on Vite and React',
-      permissions: ['storage'],
+        'One-click clear all site data (cookies, storage, cache) for the current website.',
+      permissions: ['activeTab', 'cookies', 'scripting', 'storage'],
       host_permissions: ['<all_urls>'],
       author: {
         email: 'rxliuli@gmail.com',
@@ -37,6 +37,7 @@ export default defineConfig({
       homepage_url: 'https://rxliuli.com/project/site-eraser',
     }
     if (env.browser === 'firefox') {
+      manifest.permissions = [...(manifest.permissions ?? []), 'browsingData']
       manifest.browser_specific_settings = {
         gecko: {
           id:
@@ -52,6 +53,21 @@ export default defineConfig({
       manifest.author = 'rxliuli'
     }
     return manifest
+  },
+  hooks: {
+    'build:manifestGenerated': (wxt, manifest) => {
+      if (
+        wxt.config.browser === 'safari' &&
+        manifest.background &&
+        'service_worker' in manifest.background
+      ) {
+        const sw = manifest.background.service_worker
+        manifest.background = {
+          scripts: [sw],
+          persistent: false,
+        } as any
+      }
+    },
   },
   webExt: {
     disabled: true,
