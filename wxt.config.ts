@@ -20,7 +20,7 @@ export default defineConfig({
       name: 'Scrub - Clear Site Data',
       description:
         'One-click clear all site data (cookies, storage, cache) for the current website.',
-      permissions: ['cookies', 'scripting', 'storage'],
+      permissions: ['cookies', 'scripting'],
       host_permissions: ['<all_urls>'],
       author: {
         email: 'rxliuli@gmail.com',
