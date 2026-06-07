@@ -11,7 +11,7 @@ export default defineConfig({
           tsconfigPaths: true,
         },
         test: {
-          exclude: ['**/*.unit.test.ts', 'node_modules/**'],
+          exclude: ['**/*.unit.test.ts', 'e2e/**', 'node_modules/**'],
           browser: {
             provider: playwright(),
             enabled: true,

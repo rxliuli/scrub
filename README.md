@@ -1,60 +1,30 @@
-# Browser Extension Template
+# Scrub - Clear Site Data
 
-A modern browser extension development template built with React, Shadcn/ui, and WXT. Supports building cross-browser extensions compatible with Chrome, Edge, Firefox, and Safari (requires macOS).
+One-click clear all site data for the current website. Supports cookies, localStorage, sessionStorage, IndexedDB, Cache Storage, and OPFS.
 
-## Getting Started
+## Install
 
-### Initialize Project
+- [Chrome Web Store](https://chromewebstore.google.com/detail/scrub-clear-site-data/jmaeelmmfcjjbgehpkoknomjnimcjmfc)
+- [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/scrub-clear-site-data/)
+- [Safari (Mac App Store)](https://apps.apple.com/app/scrub-clear-site-data/id6775834119)
 
-```sh
-git clone https://github.com/<your-github-username>/<your-project-name>.git
-cd <your-project-name>
-pnpm i
-pnpm init-project
-```
+## Usage
 
-Follow the prompts to enter your project name and complete the initialization.
+Click the extension icon in the toolbar — all site data for the current tab is cleared immediately. No confirmation dialog, no popup, just one click.
 
 ## Development
 
-Chrome is used as the baseline version for development. Edge, Firefox, and Safari builds are only created when needed for publishing, testing, or debugging platform-specific issues.
-
-### Start Development Server
-
 ```sh
+pnpm i
 pnpm dev
 ```
 
-After running the development server:
+Load the extension from `.output/chrome-mv3-dev` in `chrome://extensions` (Developer mode).
 
-1. Navigate to the `*.output/chrome-mv3-dev` directory to find the compiled extension files
-2. Open `chrome://extensions` in Chrome
-3. Enable "Developer mode"
-4. Drag and drop the output directory to load the extension for debugging
-
-## Build & Package
-
-### Chrome, Edge, and Firefox
-
-Generate production builds and create zip files for distribution:
+## Build
 
 ```sh
-pnpm zip && pnpm zip:firefox
+pnpm zip              # Chrome/Edge
+pnpm zip:firefox      # Firefox
+pnpm build:safari     # Safari (requires macOS + Xcode)
 ```
-
-### Safari
-
-Safari extension requires macOS environment and Xcode for building and publishing.
-
-#### Build Steps
-
-1. Update `developmentTeam` in `wxt.config.ts` with your Apple Developer Team ID
-2. Run `pnpm build:safari` - this will automatically build and open Xcode
-3. Build the project in Xcode and test in Safari
-4. To publish: In Xcode, select **Product → Archive** to submit to the App Store
-
-## Requirements
-
-- Node.js (latest LTS recommended)
-- pnpm package manager
-- macOS with Xcode (for Safari development only)
