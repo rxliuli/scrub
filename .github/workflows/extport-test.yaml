@@ -1,0 +1,31 @@
+name: extport test (push)
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Read version
+        id: pkg
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Zip
+        run: pnpm zip
+
+      - uses: extport-dev/actions/push@v1
+        with:
+          file: .output/site-eraser-${{ steps.pkg.outputs.version }}-chrome.zip
+          version: ${{ steps.pkg.outputs.version }}
+          store: chrome
+          api-key: ${{ secrets.EXTPORT_API_KEY }}
