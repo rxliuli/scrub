@@ -2,7 +2,7 @@
   "name": "scrub",
   "description": "One-click clear all site data (cookies, storage, cache) for the current website.",
   "private": true,
-  "version": "0.0.12",
+  "version": "0.0.13",
   "type": "module",
   "scripts": {
     "dev": "wxt",
