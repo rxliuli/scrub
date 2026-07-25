@@ -67,27 +67,23 @@ jobs:
       - name: Push to Chrome Web Store
         uses: extport-dev/actions/push@v1
         with:
-          file: ${{ env.DIRECTORY }}/.output/${{ steps.pkg.outputs.name }}-${{ needs.version.outputs.version }}-chrome.zip
-          version: ${{ needs.version.outputs.version }}
+          # file/version inferred from .output/ and its manifest.json.
           store: chrome
           api-key: ${{ secrets.EXTPORT_API_KEY }}
 
       - name: Push to Edge Add-ons
         uses: extport-dev/actions/push@v1
         with:
-          # Edge is Chromium-based — it reuses the same chrome build, same as
-          # the old commented-out `wxt submit --edge-zip ...-chrome.zip` step did.
-          file: ${{ env.DIRECTORY }}/.output/${{ steps.pkg.outputs.name }}-${{ needs.version.outputs.version }}-chrome.zip
-          version: ${{ needs.version.outputs.version }}
+          # Edge is Chromium-based — extport falls back to the chrome zip
+          # when no dedicated edge one was built, same as this used to do by hand.
           store: edge
           api-key: ${{ secrets.EXTPORT_API_KEY }}
 
       - name: Push to Firefox AMO
         uses: extport-dev/actions/push@v1
         with:
-          file: ${{ env.DIRECTORY }}/.output/${{ steps.pkg.outputs.name }}-${{ needs.version.outputs.version }}-firefox.zip
+          # file/version inferred; source-zip has no equivalent convention to infer from.
           source-zip: ${{ env.DIRECTORY }}/.output/${{ steps.pkg.outputs.name }}-${{ needs.version.outputs.version }}-sources.zip
-          version: ${{ needs.version.outputs.version }}
           store: firefox
           api-key: ${{ secrets.EXTPORT_API_KEY }}
 
@@ -111,16 +107,15 @@ jobs:
 
       - uses: extport-dev/actions/safari-build@v1
         with:
-          project-path: '${{ env.DIRECTORY }}/.output/Scrub - Clear Site Data'
-          team-id: N2X78TUUFG
-          issuer-id: ${{ secrets.APPLE_API_ISSUER }}
-          key-id: ${{ secrets.APPLE_API_KEY_ID }}
+          # project-path/team-id/issuer-id/key-id all inferred from
+          # extport.config.json — none of them are secrets, the actual
+          # credential is key-base64's .p8 key.
           key-base64: ${{ secrets.APPLE_API_KEY }}
           version: ${{ needs.version.outputs.version }}
 
       - name: Register the Safari version with extport
         uses: extport-dev/actions/push@v1
         with:
-          version: ${{ needs.version.outputs.version }}
+          # version inferred from package.json — no zip travels through extport for safari.
           store: safari
           api-key: ${{ secrets.EXTPORT_API_KEY }}
