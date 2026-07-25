@@ -51,6 +51,9 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
     devDependencies:
+      '@extport/wxt':
+        specifier: link:/Users/rxliuli/code/web/extport/packages/wxt
+        version: link:../extport/packages/wxt
       '@playwright/test':
         specifier: ^1.60.0
         version: 1.60.0
@@ -93,9 +96,6 @@ importers:
       wxt:
         specifier: ^0.20.25
         version: 0.20.25(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1)
-      wxt-module-safari-xcode:
-        specifier: ^0.2.0
-        version: 0.2.0(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1)
       zx:
         specifier: ^8.8.5
         version: 8.8.5
@@ -3053,9 +3053,6 @@ packages:
     resolution: {integrity: sha512-g/eziiSUNBSsdDJtCLB8bdYEUMj4jR7AGeUo96p/3dTafgjHhpF4RiCFPiRILwjQoDXx5MqkBr4fwWtR3Ky4Wg==}
     engines: {node: '>=20'}
 
-  wxt-module-safari-xcode@0.2.0:
-    resolution: {integrity: sha512-pwVa4tZHCtt8q1HYGCQ4NFwPFhyCeTZsCHgTMl0z0z1MdmjZVld6LtWdXjyAppSU8s5gRFbQdopNOO8JtwYHfA==}
-
   wxt@0.20.25:
     resolution: {integrity: sha512-ca+8Yt0Auzn9tX0ZW2Kzocb9yM8F/RoOjcYQ0fHkwcSc7/IUkqV2+1JUNn1SMSNAS4Gr3YQHAn/pi3q+jIGRqw==}
     engines: {bun: '>=1.2.0', node: '>=20.12.0'}
@@ -5944,28 +5941,6 @@ snapshots:
     dependencies:
       is-wsl: 3.1.1
       powershell-utils: 0.1.0
-
-  wxt-module-safari-xcode@0.2.0(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1):
-    dependencies:
-      zx: 8.8.5
-    optionalDependencies:
-      wxt: 0.20.25(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1)
-    transitivePeerDependencies:
-      - '@types/node'
-      - '@vitejs/devtools'
-      - canvas
-      - eslint
-      - jiti
-      - less
-      - rollup
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - tsx
-      - yaml
 
   wxt@0.20.25(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1):
     dependencies:
