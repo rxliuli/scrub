@@ -9,6 +9,8 @@ export default defineConfig({
       appCategory: 'public.app-category.productivity',
       bundleIdentifier: 'com.rxliuli.scrub',
       developmentTeam: 'N2X78TUUFG',
+      issuerId: '48f39427-c063-4e33-98d2-31de80aad0be',
+      keyId: '8N27UWG9RG',
     },
     // Daily anonymous usage ping + the Firefox data-collection declaration,
     // both injected by @extport/wxt — nothing in source. See the module docs.
