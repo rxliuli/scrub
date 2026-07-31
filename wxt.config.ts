@@ -4,9 +4,15 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   modules: ['@wxt-dev/module-react', '@extport/wxt'],
   extport: {
-    appCategory: 'public.app-category.productivity',
-    bundleIdentifier: 'com.rxliuli.scrub',
-    developmentTeam: 'N2X78TUUFG',
+    extension: 'ext_PMr2DskxRY5RG5JJCXlZ',
+    safari: {
+      appCategory: 'public.app-category.productivity',
+      bundleIdentifier: 'com.rxliuli.scrub',
+      developmentTeam: 'N2X78TUUFG',
+    },
+    // Daily anonymous usage ping + the Firefox data-collection declaration,
+    // both injected by @extport/wxt — nothing in source. See the module docs.
+    analytics: true,
   },
   vite: () => ({
     plugins: [tailwindcss()],
@@ -43,10 +49,8 @@ export default defineConfig({
           id:
             manifest.name!.toLowerCase().replaceAll(/[^a-z0-9]/g, '-') +
             '@rxliuli.com',
-          data_collection_permissions: {
-            required: ['none'],
-          },
         },
+        gecko_android: {},
       }
       // https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/author
       // @ts-expect-error

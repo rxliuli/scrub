@@ -11,6 +11,9 @@ importers:
 
   .:
     dependencies:
+      '@extport/sdk':
+        specifier: 0.0.5
+        version: 0.0.5(react@19.2.5)
       '@tailwindcss/vite':
         specifier: ^4.2.4
         version: 4.2.4(vite@8.0.10(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1))
@@ -52,8 +55,8 @@ importers:
         version: 1.4.0
     devDependencies:
       '@extport/wxt':
-        specifier: ^0.0.3
-        version: 0.0.3(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1)
+        specifier: ^0.0.4
+        version: 0.0.4(@extport/sdk@0.0.5(react@19.2.5))(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1)
       '@playwright/test':
         specifier: ^1.60.0
         version: 1.60.0
@@ -325,9 +328,22 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@extport/wxt@0.0.3':
-    resolution: {integrity: sha512-d9bIhwrb+YQnDEI9X47QFKeQhvH2Pl+qZ8Xy/NrSV3BO49WJfIPTbiK3OpuqVO+7BaJvjWkF1euzJ01+QckBkQ==}
+  '@extport/sdk@0.0.5':
+    resolution: {integrity: sha512-/Sn4rwoFPMcb+h6A3yGnfqKzDzM9YTcxU7Mn8QxgEUqroIy0s2w5RwvUE1BuOuR+RWvtMfoc+9bnzvcNaqAeyg==}
+    peerDependencies:
+      react: '>=18'
+    peerDependenciesMeta:
+      react:
+        optional: true
+
+  '@extport/wxt@0.0.4':
+    resolution: {integrity: sha512-weRRivNHJQ0g5iYNMonr1WsfCpJEIgMWIG8a6hc5rOuD1DVN6Szx17ZZzzaBKqj41psT99jGOqN4dP6sknQmxQ==}
     engines: {node: '>=18'}
+    peerDependencies:
+      '@extport/sdk': '>=0.0.5'
+    peerDependenciesMeta:
+      '@extport/sdk':
+        optional: true
 
   '@floating-ui/core@1.7.5':
     resolution: {integrity: sha512-1Ih4WTWyw0+lKyFMcBHGbb5U5FtuHJuujoyyr5zTaWS5EYMeT6Jb2AuDeftsCsEuchO+mM2ij5+q9crhydzLhQ==}
@@ -1998,6 +2014,9 @@ packages:
   htmlparser2@10.1.0:
     resolution: {integrity: sha512-VTZkM9GWRAtEpveh7MSF6SjjrpNVNNVJfFup7xTY3UpFtm67foy9HDVXneLtFVt4pMz5kZtgNcvCniNFb1hlEQ==}
 
+  idb-keyval@6.3.0:
+    resolution: {integrity: sha512-um+2dgAWmYsu615EXpWVwSmapJhON0G43t3Ka/EVaohzPQXSMqKEqeDK/oIW3Ow+BXaF2PvSc+oBTFp793A5Ow==}
+
   immediate@3.0.6:
     resolution: {integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==}
 
@@ -3254,8 +3273,15 @@ snapshots:
   '@esbuild/win32-x64@0.27.7':
     optional: true
 
-  '@extport/wxt@0.0.3(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1)':
+  '@extport/sdk@0.0.5(react@19.2.5)':
+    dependencies:
+      idb-keyval: 6.3.0
     optionalDependencies:
+      react: 19.2.5
+
+  '@extport/wxt@0.0.4(@extport/sdk@0.0.5(react@19.2.5))(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1)':
+    optionalDependencies:
+      '@extport/sdk': 0.0.5(react@19.2.5)
       wxt: 0.20.25(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1)
     transitivePeerDependencies:
       - '@types/node'
@@ -4887,6 +4913,8 @@ snapshots:
       domhandler: 5.0.3
       domutils: 3.2.2
       entities: 7.0.1
+
+  idb-keyval@6.3.0: {}
 
   immediate@3.0.6: {}
 
