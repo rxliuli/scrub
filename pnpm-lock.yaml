@@ -55,8 +55,8 @@ importers:
         version: 1.4.0
     devDependencies:
       '@extport/wxt':
-        specifier: ^0.0.5
-        version: 0.0.5(@extport/sdk@0.0.5(react@19.2.5))(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1)
+        specifier: ^0.0.9
+        version: 0.0.9(@extport/sdk@0.0.5(react@19.2.5))(wxt@0.20.25(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1))
       '@playwright/test':
         specifier: ^1.60.0
         version: 1.60.0
@@ -336,11 +336,12 @@ packages:
       react:
         optional: true
 
-  '@extport/wxt@0.0.5':
-    resolution: {integrity: sha512-70roUt0YRQhqoiIesOS03YldiD2BfAs8xzILxZWvPlI6JzOv/0ifqKcRwuyS3ZnuNnbdH9fsihVXJWYrSXFBFA==}
+  '@extport/wxt@0.0.9':
+    resolution: {integrity: sha512-Ce6Iz+itjeZ64D2UgVbdqtBEHaQtE3ENTDh8xnTDcYj3JNHIH+uY1YiSowfmJZIw2tCi713ESMeKyOCK5EvYSA==}
     engines: {node: '>=18'}
     peerDependencies:
       '@extport/sdk': '>=0.0.5'
+      wxt: '>=0.20.0'
     peerDependenciesMeta:
       '@extport/sdk':
         optional: true
@@ -3279,26 +3280,11 @@ snapshots:
     optionalDependencies:
       react: 19.2.5
 
-  '@extport/wxt@0.0.5(@extport/sdk@0.0.5(react@19.2.5))(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1)':
+  '@extport/wxt@0.0.9(@extport/sdk@0.0.5(react@19.2.5))(wxt@0.20.25(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1))':
+    dependencies:
+      wxt: 0.20.25(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1)
     optionalDependencies:
       '@extport/sdk': 0.0.5(react@19.2.5)
-      wxt: 0.20.25(@types/node@25.6.0)(jiti@2.6.1)(rollup@4.57.1)
-    transitivePeerDependencies:
-      - '@types/node'
-      - '@vitejs/devtools'
-      - canvas
-      - eslint
-      - jiti
-      - less
-      - rollup
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - tsx
-      - yaml
 
   '@floating-ui/core@1.7.5':
     dependencies:
