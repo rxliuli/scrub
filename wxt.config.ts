@@ -1,4 +1,4 @@
-import { defineConfig, UserManifest } from 'wxt'
+import { defineConfig, type UserManifest } from 'wxt'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
@@ -28,7 +28,7 @@ export default defineConfig({
       name: 'Scrub - Clear Site Data',
       description:
         'One-click clear all site data (cookies, storage, cache) for the current website.',
-      permissions: ['cookies', 'scripting'],
+      permissions: ['cookies', 'scripting', 'storage'],
       host_permissions: ['<all_urls>'],
       author: {
         email: 'rxliuli@gmail.com',
@@ -48,9 +48,10 @@ export default defineConfig({
       manifest.permissions = [...(manifest.permissions ?? []), 'browsingData']
       manifest.browser_specific_settings = {
         gecko: {
-          id:
-            manifest.name!.toLowerCase().replaceAll(/[^a-z0-9]/g, '-') +
-            '@rxliuli.com',
+          id: 'scrub---clear-site-data@rxliuli.com',
+          data_collection_permissions: {
+            required: ['none'],
+          },
         },
         gecko_android: {},
       }

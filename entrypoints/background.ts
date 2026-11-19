@@ -1,5 +1,5 @@
 import { messager } from '@/lib/message'
-import { ScriptPublicPath } from 'wxt/utils/inject-script'
+import type { ScriptPublicPath } from 'wxt/utils/inject-script'
 
 export default defineBackground(() => {
   browser.action.onClicked.addListener(async (tab) => {
