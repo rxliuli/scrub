@@ -1805,7 +1805,7 @@ packages:
     engines: {node: ^10 || ^12 || >=14}
 
   publish-browser-extension@file:vendor/publish-browser-extension-6.2.0.tgz:
-    resolution: {integrity: sha512-cYWNoi/g/Vmx477275LJ8l5WkK2poU9vNqw2ageQNEALel/+3C1p0C/p3jI/qG7vaFDCfQJbUSL+y3cpnObajg==, tarball: file:vendor/publish-browser-extension-6.2.0.tgz}
+    resolution: {integrity: sha512-Wai4OdaaqN9KBL1hd/B7p+s+IguJJcsHYTFczp4GJqUjoT/f/gf9mLDpazwhU1kVVjdzgVD5WTODHP/M9dte4g==, tarball: file:vendor/publish-browser-extension-6.2.0.tgz}
     version: 6.2.0
     engines: {node: '>=22.0.0'}
     hasBin: true

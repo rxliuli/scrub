@@ -22,35 +22,11 @@ jobs:
       - name: Build Safari extension (WXT built-in Safari module)
         run: pnpm build:safari
 
-      - name: Import Apple Distribution certificate into temporary keychain
-        env:
-          APPLE_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
-          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
-        run: |
-          KEYCHAIN_PATH="$RUNNER_TEMP/app-signing.keychain-db"
-          KEYCHAIN_PASSWORD="$(openssl rand -base64 32)"
-          CERT_PATH="$RUNNER_TEMP/certificate.p12"
-
-          echo -n "$APPLE_CERTIFICATE_BASE64" | base64 --decode > "$CERT_PATH"
-          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
-          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-          security import "$CERT_PATH" -P "$APPLE_CERTIFICATE_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
-          security list-keychains -d user -s "$KEYCHAIN_PATH" login.keychain-db
-          security default-keychain -s "$KEYCHAIN_PATH"
-          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-          rm -f "$CERT_PATH"
-
       - name: Upload Safari builds via wxt submit (--safari-skip-submit-review)
         env:
           SAFARI_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER }}
           SAFARI_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
-          APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
-        run: |
-          KEY_PATH="$RUNNER_TEMP/AuthKey_${SAFARI_KEY_ID}.p8"
-          echo -n "$APPLE_API_KEY" | base64 --decode > "$KEY_PATH"
-          pnpm exec wxt submit \
-            --safari-project-path ".output/Scrub - Clear Site Data" \
-            --safari-key-path "$KEY_PATH" \
-            --safari-skip-submit-review
-          rm -f "$KEY_PATH"
+          SAFARI_PRIVATE_KEY: ${{ secrets.APPLE_API_KEY }}
+          SAFARI_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
+          SAFARI_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+        run: pnpm exec wxt submit --safari-project-path ".output/Scrub - Clear Site Data" --safari-skip-submit-review
