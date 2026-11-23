@@ -5,6 +5,8 @@
 # (`pnpm approve-builds` writes this block).
 allowBuilds:
   esbuild: true
+overrides:
+  publish-browser-extension: file:./vendor/publish-browser-extension-6.2.0.tgz
 minimumReleaseAgeExclude:
   - '@vitest/browser-playwright@5.1.1'
   - '@vitest/browser@5.1.1'
